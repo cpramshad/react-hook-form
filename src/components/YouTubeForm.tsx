@@ -62,6 +62,7 @@ export const YouTubeForm = () => {
           />
           <p className="error">{errors.username?.message}</p>
         </div>
+
         <div className="form-control">
           <label htmlFor="email">Email</label>
           <input
@@ -82,10 +83,15 @@ export const YouTubeForm = () => {
                   );
                 },
               },
+              required: {
+                value: true,
+                message: 'Email is required',
+              },
             })}
           />
           <p className="error">{errors.email?.message}</p>
         </div>
+
         <div className="form-control">
           <label htmlFor="channel">Channel</label>
           <input
@@ -103,12 +109,32 @@ export const YouTubeForm = () => {
 
         <div className="form-control">
           <label htmlFor="twitter">Twitter</label>
-          <input type="text" id="twitter" {...register('social.twitter')} />
+          <input
+            type="text"
+            id="twitter"
+            {...register('social.twitter', {
+              required: {
+                value: true,
+                message: 'Twitter is required',
+              },
+            })}
+          />
+          <p className="error">{errors.social?.twitter?.message}</p>
         </div>
 
         <div className="form-control">
           <label htmlFor="facebook">Facebook</label>
-          <input type="text" id="facebook" {...register('social.facebook')} />
+          <input
+            type="text"
+            id="facebook"
+            {...register('social.facebook', {
+              required: {
+                value: true,
+                message: 'Facebook is required',
+              },
+            })}
+          />
+          <p className="error">{errors.social?.facebook?.message}</p>
         </div>
 
         <div className="form-control">
@@ -116,8 +142,14 @@ export const YouTubeForm = () => {
           <input
             type="text"
             id="primary-phone"
-            {...register('phoneNumbers.0')}
+            {...register('phoneNumbers.0', {
+              required: {
+                value: true,
+                message: 'Primary is required',
+              },
+            })}
           />
+          <p className="error">{errors.phoneNumbers?.[0]?.message}</p>
         </div>
 
         <div className="form-control">
@@ -125,8 +157,14 @@ export const YouTubeForm = () => {
           <input
             type="text"
             id="secondary-phone"
-            {...register('phoneNumbers.1')}
+            {...register('phoneNumbers.1', {
+              required: {
+                value: true,
+                message: 'Seondary is required',
+              },
+            })}
           />
+          <p className="error">{errors.phoneNumbers?.[1]?.message}</p>
         </div>
 
         <button>Submit</button>
