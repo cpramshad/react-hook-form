@@ -9,7 +9,21 @@ type FormValues = {
 };
 
 export const YouTubeForm = () => {
-  const form = useForm<FormValues>();
+  const form = useForm<FormValues>({
+    defaultValues: {
+      username: 'ramshad',
+      email: '',
+      channel: '',
+    },
+  });
+
+  // const form = useForm<FormValues>({
+  //   defaultValues: async () => {
+  //     const res = await fetch('https://jsonplaceholder.typicode.com/users/1');
+  //     const data = await res.json();
+  //     return { username: 'Ramshad', email: data.email, channel: '' };
+  //   },
+  // });
   const { register, control, handleSubmit, formState } = form;
   // const { name, ref, onChange, onBlur } = register('username');
 
