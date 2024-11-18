@@ -1,23 +1,24 @@
 /* eslint-disable no-unused-vars */
 import { useForm, useFieldArray } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
-import { Box, Stack, TextField } from '@mui/material';
+import { Box, Stack, TextField, Typography } from '@mui/material';
+import testData from './testData.json';
 
 type FormValues = {
   username: string;
   questionnaire: {
     question: string;
-    answer1: string;
-    answer2: string;
-    answer3: string;
+    answer_1: string;
+    answer_2: string;
+    answer_3: string;
   }[];
 };
 
 const initialState = {
   question: '',
-  answer1: '',
-  answer2: '',
-  answer3: '',
+  answer_1: '',
+  answer_2: '',
+  answer_3: '',
 };
 
 export const DynamicForm = () => {
@@ -54,30 +55,62 @@ export const DynamicForm = () => {
             helperText={errors.username?.message}
           />
           <Stack spacing={2}>
-            <h3>Questions</h3>
+            <Typography>{testData.label.en}</Typography>
+            {/* Loop through questionnaire array */}
             {fields.map((field, index) => {
+              //   console.log('****field', field);
               return (
-                // eslint-disable-next-line react/jsx-key
-                <Box>
-                  <TextField
-                    label="Question"
-                    type="text"
-                    {...register(`questionnaire.${index}.question`, {
-                      required: {
-                        value: true,
-                        message: 'Question is required',
-                      },
-                    })}
-                    error={!!errors.questionnaire?.[index]?.question}
-                    helperText={
-                      errors.questionnaire?.[index]?.question?.message
-                    }
-                  />
-                </Box>
+                <Stack
+                  key={field.id}
+                  border={1}
+                  borderRadius={2}
+                  padding={2}
+                  spacing={2}
+                >
+                  <Typography variant="h6">Question Set {index + 1}</Typography>
+                  {/* Loop through keys of the current questionnaire object */}
+                  {Object.keys(field).map((key) => {
+                    if (key === 'id') return null; // Skip rendering the `id` key
+                    const fieldValues = testData.fields.find(
+                      (f) => f.field_name === key,
+                    );
+
+                    return (
+                      <TextField
+                        key={key}
+                        label={fieldValues?.label.en}
+                        type="text"
+                        placeholder={fieldValues?.help_text.en}
+                        {...register(
+                          `questionnaire.${index}.${key}` as
+                            | `questionnaire.${number}.question`
+                            | `questionnaire.${number}.answer_1`
+                            | `questionnaire.${number}.answer_2`
+                            | `questionnaire.${number}.answer_2`,
+                          {
+                            required: {
+                              value: true,
+                              message: 'Question is required',
+                            },
+                          },
+                        )}
+                        error={!!errors.questionnaire?.[index]?.question}
+                        helperText={
+                          errors.questionnaire?.[index]?.question?.message
+                        }
+                      />
+                    );
+                  })}
+                  {index > 0 && (
+                    <button type="button" onClick={() => remove(index)}>
+                      Remove Question
+                    </button>
+                  )}
+                </Stack>
               );
             })}
             <button type="button" onClick={() => append(initialState)}>
-              Add Phone
+              Add Question
             </button>
           </Stack>
         </Stack>

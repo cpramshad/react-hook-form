@@ -10,6 +10,7 @@
     "label_style": "plain",
     "fields": [
         {
+            "field_name": "question",
             "label": {
                 "en": "Ask your candidate a question",
                 "ar": "Ask your candidate a question"
@@ -26,66 +27,67 @@
                 "max_length": 100,
                 "regex": ".*",
                 "relations": []
+            }
+        },
+        {
+            "field_name": "answer_1",
+            "label": {
+                "en": "What's the correct answer",
+                "ar": "What's the correct answer"
             },
-            "fields": [
-                {
-                    "label": {
-                        "en": "What's the correct answer",
-                        "ar": "What's the correct answer"
-                    },
-                    "help_text": {
-                        "en": "Bananas",
-                        "ar": "Bananas"
-                    },
-                    "position": -1,
-                    "input_type": "text",
-                    "validation_rules": {
-                        "required": true,
-                        "min_length": 1,
-                        "max_length": 100,
-                        "regex": ".*",
-                        "relations": []
-                    }
-                },
-                {
-                    "label": {
-                        "en": "List a wrong answer",
-                        "ar": "List a wrong answer"
-                    },
-                    "help_text": {
-                        "en": "Grapefruites",
-                        "ar": "Grapefruites"
-                    },
-                    "position": -1,
-                    "input_type": "text",
-                    "validation_rules": {
-                        "required": true,
-                        "min_length": 1,
-                        "max_length": 100,
-                        "regex": ".*",
-                        "relations": []
-                    }
-                },
-                {
-                    "label": {
-                        "en": "List another wrong answer (optional)",
-                        "ar": "List another wrong answer (optional)"
-                    },
-                    "help_text": {
-                        "en": "Calamari",
-                        "ar": "Calamari"
-                    },
-                    "position": -1,
-                    "input_type": "text",
-                    "validation_rules": {
-                        "required": true,
-                        "min_length": 1,
-                        "max_length": 100,
-                        "regex": ".*",
-                        "relations": []
-                    }
-                }
-            ]
+            "help_text": {
+                "en": "Bananas",
+                "ar": "Bananas"
+            },
+            "position": -1,
+            "input_type": "text",
+            "validation_rules": {
+                "required": true,
+                "min_length": 1,
+                "max_length": 100,
+                "regex": ".*",
+                "relations": []
+            }
+        },
+        {
+            "field_name": "answer_2",
+            "label": {
+                "en": "List a wrong answer",
+                "ar": "List a wrong answer"
+            },
+            "help_text": {
+                "en": "Grapefruit",
+                "ar": "Grapefruit"
+            },
+            "position": -1,
+            "input_type": "text",
+            "validation_rules": {
+                "required": true,
+                "min_length": 1,
+                "max_length": 100,
+                "regex": ".*",
+                "relations": []
+            }
+        },
+        {
+            "field_name": "answer_3",
+            "label": {
+                "en": "List another wrong answer (optional)",
+                "ar": "List another wrong answer (optional)"
+            },
+            "help_text": {
+                "en": "Calamari",
+                "ar": "Calamari"
+            },
+            "position": -1,
+            "input_type": "text",
+            "validation_rules": {
+                "required": true,
+                "min_length": 1,
+                "max_length": 100,
+                "regex": ".*",
+                "relations": []
+            }
         }
     ],
     "validation_rules": {
