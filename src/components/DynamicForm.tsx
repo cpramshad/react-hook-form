@@ -5,8 +5,6 @@ import { Box, Stack, TextField } from '@mui/material';
 
 type FormValues = {
   username: string;
-  email: string;
-  channel: string;
   questionnaire: {
     question: string;
     answer1: string;
@@ -46,17 +44,15 @@ export const DynamicForm = () => {
           <TextField
             label="Username"
             type="text"
-            {...register('username', { required: 'username is required' })}
+            {...register('username', {
+              required: {
+                value: true,
+                message: 'username is required',
+              },
+            })}
             error={!!errors.username}
             helperText={errors.username?.message}
           />
-          {/* <TextField
-            label="Email"
-            type="email"
-            {...register('email', { required: 'Email is required' })}
-            error={!!errors.email}
-            helperText={errors.email?.message}
-          /> */}
           <Stack spacing={2}>
             <h3>Questions</h3>
             {fields.map((field, index) => {
@@ -66,7 +62,16 @@ export const DynamicForm = () => {
                   <TextField
                     label="Question"
                     type="text"
-                    {...register(`questionnaire.${index}.question`)}
+                    {...register(`questionnaire.${index}.question`, {
+                      required: {
+                        value: true,
+                        message: 'Question is required',
+                      },
+                    })}
+                    error={!!errors.questionnaire?.[index]?.question}
+                    helperText={
+                      errors.questionnaire?.[index]?.question?.message
+                    }
                   />
                 </Box>
               );
