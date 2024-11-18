@@ -22,7 +22,18 @@ const initialState = {
 };
 
 export const DynamicForm = () => {
-  const form = useForm<FormValues>();
+  const form = useForm<FormValues>({
+    defaultValues: {
+      questionnaire: [
+        {
+          question: 'What is react?',
+          answer_1: 'UI Library',
+          answer_2: 'Server',
+          answer_3: 'DB',
+        },
+      ],
+    },
+  });
 
   const { register, control, handleSubmit, formState } = form;
   const { errors } = formState;
