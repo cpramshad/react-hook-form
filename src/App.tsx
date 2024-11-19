@@ -3,7 +3,8 @@ import React from 'react';
 // import { YouTubeForm } from './components/YouTubeForm';
 // import { YupYouTubeForm } from './components/YupYouTubeForm';
 // import { DynamicForm } from './components/DynamicForm';
-import { ControlledDynamicForm } from './components/ControlledDynamicForm';
+// import { ControlledDynamicForm } from './components/ControlledDynamicForm';
+import { ControlledDynamicFormYup } from './components/ControlledDynamicFormYup';
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
       {/* <YouTubeForm /> */}
       {/* <YupYouTubeForm /> */}
       {/* <DynamicForm /> */}
-      <ControlledDynamicForm />
+      {/* <ControlledDynamicForm /> */}
+      <ControlledDynamicFormYup />
     </div>
   );
 }

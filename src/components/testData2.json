@@ -1,0 +1,143 @@
+{
+    "fields": [
+      {
+        "field_name": "username",
+        "label": {
+          "en": "Username",
+          "ar": "Username"
+        },
+        "help_text": {
+          "en": "Username",
+          "ar": "Username"
+        },
+        "position": 1,
+        "input_type": "text",
+        "validation_rules": {
+          "required": true,
+          "min_length": 1,
+          "max_length": 100,
+          "regex": ".*"
+        },
+        "value": "New"
+      },
+      {
+        "label": {
+          "en": "Ask applicants a question to see if they qualify!",
+          "ar": "Ask applicants a question to see if they qualify!"
+        },
+        "help_text": {
+          "en": "If they don't answer correctly, we'll filter them out of your applicants",
+          "ar": "If they don't answer correctly, we'll filter them out of your applicants"
+        },
+        "label_style": "plain",
+        "fields": [
+          {
+            "field_name": "question",
+            "label": {
+              "en": "Ask your candidate a question",
+              "ar": "Ask your candidate a question"
+            },
+            "help_text": {
+              "en": "What food does banana Man eat?",
+              "ar": "What food does banana Man eat?"
+            },
+            "position": -1,
+            "input_type": "text",
+            "validation_rules": {
+              "required": true,
+              "min_length": 1,
+              "max_length": 100,
+              "regex": ".*",
+              "relations": []
+            }
+          },
+          {
+            "field_name": "answer_1",
+            "label": {
+              "en": "What's the correct answer",
+              "ar": "What's the correct answer"
+            },
+            "help_text": {
+              "en": "Bananas",
+              "ar": "Bananas"
+            },
+            "position": -1,
+            "input_type": "text",
+            "validation_rules": {
+              "required": true,
+              "min_length": 1,
+              "max_length": 100,
+              "regex": ".*",
+              "relations": [
+                {
+                  "relation": "question",
+                  "isValid": true,
+                  "isBlank": false
+                }
+              ]
+            }
+          },
+          {
+            "field_name": "answer_2",
+            "label": {
+              "en": "List a wrong answer",
+              "ar": "List a wrong answer"
+            },
+            "help_text": {
+              "en": "Grapefruit",
+              "ar": "Grapefruit"
+            },
+            "position": -1,
+            "input_type": "text",
+            "validation_rules": {
+              "required": true,
+              "min_length": 1,
+              "max_length": 100,
+              "regex": ".*",
+              "relations": [
+                {
+                  "relation": "question",
+                  "isValid": true,
+                  "isBlank": false
+                }
+              ]
+            }
+          },
+          {
+            "field_name": "answer_3",
+            "label": {
+              "en": "List another wrong answer (optional)",
+              "ar": "List another wrong answer (optional)"
+            },
+            "help_text": {
+              "en": "Calamari",
+              "ar": "Calamari"
+            },
+            "position": -1,
+            "input_type": "text",
+            "validation_rules": {}
+          }
+        ],
+        "validation_rules": {
+          "required": false
+        },
+        "meta_data": {
+          "action": {
+            "type": "show_hide_field",
+            "show_field": {
+              "en": "Ask a question",
+              "ar": "Ask a question"
+            },
+            "hide_label": {
+              "en": "Delete question",
+              "ar": "Delete question"
+            },
+            "initial_state": "hidden"
+          }
+        },
+        "field_name": "questionnaire",
+        "position": 1,
+        "input_type": "questionnaire"
+      }
+    ]
+  }
