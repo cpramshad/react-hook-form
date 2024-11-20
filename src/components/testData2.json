@@ -44,11 +44,6 @@
             "position": -1,
             "input_type": "text",
             "validation_rules": {
-              "required": true,
-              "min_length": 1,
-              "max_length": 100,
-              "regex": ".*",
-              "relations": []
             }
           },
           {
@@ -65,7 +60,6 @@
             "input_type": "text",
             "validation_rules": {
               "required": true,
-              "min_length": 1,
               "max_length": 100,
               "regex": ".*",
               "relations": [
@@ -91,7 +85,6 @@
             "input_type": "text",
             "validation_rules": {
               "required": true,
-              "min_length": 1,
               "max_length": 100,
               "regex": ".*",
               "relations": [
@@ -120,20 +113,6 @@
         ],
         "validation_rules": {
           "required": false
-        },
-        "meta_data": {
-          "action": {
-            "type": "show_hide_field",
-            "show_field": {
-              "en": "Ask a question",
-              "ar": "Ask a question"
-            },
-            "hide_label": {
-              "en": "Delete question",
-              "ar": "Delete question"
-            },
-            "initial_state": "hidden"
-          }
         },
         "field_name": "questionnaire",
         "position": 1,
