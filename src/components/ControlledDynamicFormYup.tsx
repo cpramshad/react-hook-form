@@ -56,7 +56,7 @@ export const ControlledDynamicFormYup = () => {
     (field) => field.field_name === 'questionnaire',
   )[0];
 
-  const { control, handleSubmit, formState } = form;
+  const { control, handleSubmit, formState, watch } = form;
   const { errors } = formState;
 
   const { fields, append, remove } = useFieldArray({
@@ -91,6 +91,10 @@ export const ControlledDynamicFormYup = () => {
             <Typography>{questionnaireField.label.en}</Typography>
             {/* Loop through questionnaire array */}
             {fields.map((field, index) => {
+              // Watch the value of 'question' for the current index
+              const questionValue = watch(`questionnaire.${index}.question`);
+              console.log('****questionValue', questionValue);
+
               return (
                 <Stack
                   key={field.id}
@@ -148,6 +152,7 @@ export const ControlledDynamicFormYup = () => {
                                 `Value changed in ${field.name}: ${e.target.value}`,
                               );
                             }}
+                            disabled={key !== 'question' && !questionValue}
                           />
                         )}
                       />

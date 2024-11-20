@@ -1,8 +1,8 @@
-// @ts-nocheck
 import * as yup from 'yup';
 
 // Helper function to build Yup validation for a single field
-const createFieldValidation = (rules: any) => {
+const createFieldValidation = (rules: any, fieldName: string) => {
+  console.log(`*****createFieldValidation of ${fieldName}`, rules);
   let validator = yup.string();
 
   if (rules.min_length) {
@@ -24,32 +24,37 @@ const createFieldValidation = (rules: any) => {
   }
 
   // Add custom relational validation
-  if (rules.relations && rules.relations.length > 0) {
-    rules.relations.forEach((relation: any) => {
-      validator = validator.test(
-        'relation-required',
-        `This field is required because ${relation.relation} is valid.`,
-        function (value) {
-          const parent = this.parent; // Access the sibling fields in the same object
-          const relatedValue = parent[relation.relation]; // Value of the related field
-          console.log('***** Related field value:', relatedValue);
-          console.log('***** Current field value:', value);
+  if (rules.required) {
+    if (rules.relations && rules.relations.length > 0) {
+      rules.relations.forEach((relation: any) => {
+        validator = validator.test(
+          'relation-required',
+          `This field is required because ${relation.relation} is valid.`,
+          function (value) {
+            const parent = this.parent; // Access sibling fields
+            console.log('*****parent', parent);
+            const relatedValue = parent[relation.relation]; // Value of the related field
+            console.log('***** Related field value:', relatedValue);
+            console.log('***** Current field value:', value);
 
-          // Check if the related field is valid and non-blank
-          if (
-            relation.isValid &&
-            typeof relatedValue === 'string' &&
-            relatedValue.trim() !== ''
-          ) {
-            return value && value.trim() !== ''; // Current field must not be blank
-          }
+            // Check if the related field is valid and non-blank
+            if (
+              relation.isValid &&
+              typeof relatedValue === 'string' &&
+              relatedValue.trim() !== ''
+            ) {
+              // Return false if current field is empty
+              return !!value && value.trim() !== '';
+            }
 
-          return true; // Pass validation if relation condition is not met
-        },
-      );
-    });
-  } else if (rules.required) {
-    validator = validator.required('This field is required');
+            // Pass validation if the related condition is not met
+            return true;
+          },
+        );
+      });
+    } else {
+      validator = validator.required('This field is required');
+    }
   }
 
   return validator;
@@ -70,7 +75,10 @@ export const generateSchema = (testData: any) => {
       questionnaireField.fields.reduce(
         (acc: any, field: any) => ({
           ...acc,
-          [field.field_name]: createFieldValidation(field.validation_rules),
+          [field.field_name]: createFieldValidation(
+            field.validation_rules,
+            field.field_name,
+          ),
         }),
         {},
       ),
@@ -80,6 +88,7 @@ export const generateSchema = (testData: any) => {
   return yup.object({
     [usernameField.field_name]: createFieldValidation(
       usernameField.validation_rules,
+      usernameField.field_name,
     ),
     [questionnaireField.field_name]: questionnaireSchema,
   });
