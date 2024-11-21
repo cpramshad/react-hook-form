@@ -8,6 +8,7 @@ import { Stack, TextField, Typography } from '@mui/material';
 import * as yup from 'yup';
 import testData from './testData2.json';
 import { generateSchema } from '../helpers/yupSchema';
+import { shouldDisableField } from '../helpers/disableLogic';
 
 type FormValues = {
   username: string;
@@ -64,6 +65,12 @@ export const ControlledDynamicFormYup = () => {
     control,
   });
 
+  const watchedValues = {
+    question: watch(`questionnaire.0.question`),
+    answer_1: watch(`questionnaire.1.answer_1`),
+    answer_2: watch(`questionnaire.2.answer_2`),
+  };
+
   const onSubmit = (data: FormValues) => {
     console.log('****form submitted ', data);
   };
@@ -92,8 +99,7 @@ export const ControlledDynamicFormYup = () => {
             {/* Loop through questionnaire array */}
             {fields.map((field, index) => {
               // Watch the value of 'question' for the current index
-              const questionValue = watch(`questionnaire.${index}.question`);
-              console.log('****questionValue', questionValue);
+              const valueFilled = watch(`questionnaire.${index}`);
 
               return (
                 <Stack
@@ -152,7 +158,7 @@ export const ControlledDynamicFormYup = () => {
                                 `Value changed in ${field.name}: ${e.target.value}`,
                               );
                             }}
-                            disabled={key !== 'question' && !questionValue}
+                            disabled={shouldDisableField(valueFilled, key)}
                           />
                         )}
                       />
